@@ -20,8 +20,9 @@ class DatabaseHelper {
 
   static Future insert(Map<String, Object> data) async {
     final database = await DatabaseHelper.database();
-    database.insert("notes", data,
+    final db = database.insert("notes", data,
         conflictAlgorithm: ConflictAlgorithm.replace);
+    return db;
   }
 
   static Future delete(int id) async {

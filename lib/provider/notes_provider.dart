@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../database.dart';
+import '../database/database.dart';
 import '../models/models.dart';
 
 class NoteProvider with ChangeNotifier {
@@ -28,15 +28,17 @@ class NoteProvider with ChangeNotifier {
   }
 
   Future addNote(String title, String content) async {
-    final db = DatabaseHelper.insert({
+    final db = await DatabaseHelper.insert({
       'title': title,
       'content': content,
     });
-    // final note = NoteModel(id, title, content);
-    // _items.insert(0, note);
+
+    final note = NoteModel(db, title, content);
+    _items.insert(0, note);
+    notifyListeners();
   }
 
-  Future UpdateNote(int id, String title, String content) async {
+  Future updateNote(int id, String title, String content) async {
     final note = NoteModel(id, title, content);
 
     _items[_items.indexWhere((note) => note.id == id)] = note;

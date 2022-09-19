@@ -1,8 +1,11 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:notes_app/provider/notes_provider.dart';
 import 'package:notes_app/screens/note_screen.dart';
 import 'package:provider/provider.dart';
+
+import '../components/app_bar.dart';
+import '../components/empty_list.dart';
+import '../components/note_item.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -23,6 +26,7 @@ class _MainScreenState extends State<MainScreen> {
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
+              extendBodyBehindAppBar: true,
               body: Consumer<NoteProvider>(
                 child: emptyList(context),
                 builder: (context, noteProvider, child) =>
@@ -67,140 +71,5 @@ class _MainScreenState extends State<MainScreen> {
             return Container();
           }
         });
-  }
-}
-
-Widget appBar(context) {
-  return Container(
-    decoration: const BoxDecoration(
-      color: Colors.blueGrey,
-      borderRadius: BorderRadius.only(
-        bottomRight: Radius.circular(75.0),
-      ),
-    ),
-    height: MediaQuery.of(context).size.height / 5,
-    width: double.infinity,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Text(
-          'All Notes',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w700,
-            fontSize: 20,
-          ),
-        )
-      ],
-    ),
-  );
-}
-
-Widget emptyList(BuildContext context) {
-  return ListView(
-    children: [
-      appBar(context),
-      Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 50.0),
-            child: Image.asset(
-              'assets/empty.jpg',
-              fit: BoxFit.cover,
-              width: 200.0,
-              height: 200.0,
-            ),
-          ),
-          RichText(
-            text: TextSpan(
-                style: const TextStyle(
-                  color: Colors.black,
-                ),
-                children: [
-                  const TextSpan(
-                    text: ' There are no notes available\n Tap on "',
-                  ),
-                  TextSpan(
-                      text: '+',
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          // goToNoteEditScreen(context);
-                        }),
-                  const TextSpan(text: '" to add new note')
-                ]),
-          ),
-        ],
-      ),
-    ],
-  );
-}
-
-class NotesItem extends StatelessWidget {
-  final int id;
-  final String title;
-  final String content;
-  final String date;
-  const NotesItem(
-      {required this.id,
-      required this.title,
-      required this.content,
-      required this.date,
-      Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 8.0,
-        left: 10,
-        right: 10,
-      ),
-      child: GestureDetector(
-        onTap: () {
-          ///TODO: onGenerate
-          Navigator.pushNamed(context, NoteScreen.route, arguments: id);
-        },
-        child: Container(
-          padding: const EdgeInsets.all(
-            10,
-          ),
-          height: MediaQuery.of(context).size.height / 12,
-          decoration: BoxDecoration(
-            color: Colors.pinkAccent.withOpacity(0.15),
-            borderRadius: BorderRadius.circular(
-              25,
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black87),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                content,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 5,
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.black87),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

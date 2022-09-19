@@ -40,7 +40,7 @@ class _NoteScreenState extends State<NoteScreen> {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
         title: const Text(
-          'My Note',
+          'My Note ',
         ),
         centerTitle: true,
         actions: [
@@ -50,7 +50,7 @@ class _NoteScreenState extends State<NoteScreen> {
                 Provider.of<NoteProvider>(context, listen: false)
                     .addNote(_titleController.text, _contentController.text);
               } else {
-                Provider.of<NoteProvider>(context, listen: false).UpdateNote(
+                Provider.of<NoteProvider>(context, listen: false).updateNote(
                     note.id, _titleController.text, _contentController.text);
               }
               // Navigator.of(context).pop();
@@ -104,18 +104,6 @@ class _NoteScreenState extends State<NoteScreen> {
       ),
     );
   }
-
-  // void saveNote() {
-  //   String title = _titleController.text.trim();
-  //   String content = _contentController.text.trim();
-  //   int id = DateTime.now().millisecondsSinceEpoch;
-  //   Provider.of<NoteProvider>(context, listen: false)
-  //       .addOrUpdateNote(id, title, content, true);
-  //
-  //   ///TODO
-  //   Navigator.of(context)
-  //       .pushReplacementNamed('NoteViewScreen.route', arguments: id);
-  // }
 
   @override
   void dispose() {
