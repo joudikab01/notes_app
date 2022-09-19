@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/provider/notes_provider.dart';
 import 'package:notes_app/screens/main_screen.dart';
+import 'package:notes_app/screens/note_screen.dart';
 
 import 'package:provider/provider.dart';
 
@@ -22,9 +23,10 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-          // onGenerateRoute: ,
+        // onGenerateRoute: ,
         home: MainScreen(),
-          ),
+        routes: {NoteScreen.route: (context) => NoteScreen()},
+      ),
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class NoteModel {
   int id;
   String title;
@@ -9,4 +11,9 @@ class NoteModel {
     this.body,
     //this.dateTime,
   );
+
+  String get date {
+    final date = DateTime.fromMillisecondsSinceEpoch(id);
+    return DateFormat('EEE h:mm a, dd/MM/yyyy').format(date);
+  }
 }
