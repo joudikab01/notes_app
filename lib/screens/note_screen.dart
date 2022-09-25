@@ -6,7 +6,8 @@ import '../provider/notes_provider.dart';
 
 class NoteScreen extends StatefulWidget {
   static const route = '/note_view';
-  const NoteScreen({Key? key}) : super(key: key);
+  final int id;
+  const NoteScreen({required this.id, Key? key}) : super(key: key);
 
   @override
   State<NoteScreen> createState() => _NoteScreenState();
@@ -21,13 +22,15 @@ class _NoteScreenState extends State<NoteScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    var id = int.parse(ModalRoute.of(context)!.settings.arguments.toString());
-    if (Provider.of<NoteProvider>(context, listen: false).getNote(id) != null) {
-      note = Provider.of<NoteProvider>(context, listen: false).getNote(id)!;
+    //var id = int.parse(ModalRoute.of(context)!.settings.arguments.toString());
+    if (Provider.of<NoteProvider>(context, listen: false).getNote(widget.id) !=
+        null) {
+      note =
+          Provider.of<NoteProvider>(context, listen: false).getNote(widget.id)!;
       _titleController.text = note.title;
       _contentController.text = note.body;
     }
-    if (id == 0) {
+    if (widget.id == 0) {
       firstTime = true;
     } else {
       firstTime = false;
@@ -39,7 +42,7 @@ class _NoteScreenState extends State<NoteScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
-        title: const Text(
+        title: Text(
           'My Note ',
         ),
         centerTitle: true,

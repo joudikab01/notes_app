@@ -8,6 +8,7 @@ import '../components/empty_list.dart';
 import '../components/note_item.dart';
 
 class MainScreen extends StatefulWidget {
+  static const route = '/';
   const MainScreen({Key? key}) : super(key: key);
 
   @override

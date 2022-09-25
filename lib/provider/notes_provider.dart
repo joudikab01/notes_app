@@ -41,15 +41,14 @@ class NoteProvider with ChangeNotifier {
   Future updateNote(int id, String title, String content) async {
     final note = NoteModel(id, title, content);
 
-    _items[_items.indexWhere((note) => note.id == id)] = note;
-
-    notifyListeners();
-
     DatabaseHelper.insert({
       'id': note.id,
       'title': note.title,
       'content': note.body,
     });
+    _items[_items.indexWhere((note) => note.id == id)] = note;
+
+    notifyListeners();
   }
 
   Future deleteNote(int id) {

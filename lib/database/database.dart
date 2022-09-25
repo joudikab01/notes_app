@@ -25,6 +25,14 @@ class DatabaseHelper {
     return db;
   }
 
+  static Future update(Map<String, Object> data) async {
+    //final database = await DatabaseHelper.database();
+    final db = DatabaseHelper.update(
+      data,
+    );
+    return db;
+  }
+
   static Future delete(int id) async {
     final database = await DatabaseHelper.database();
 

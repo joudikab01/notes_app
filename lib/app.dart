@@ -24,8 +24,9 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: (settings) => generateRoutes(settings),
-        home: MainScreen(),
-        routes: {NoteScreen.route: (context) => NoteScreen()},
+        initialRoute: MainScreen.route,
+        // home: MainScreen(),
+        // routes: {NoteScreen.route: (context) => NoteScreen()},
       ),
     );
   }
