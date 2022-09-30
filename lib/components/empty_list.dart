@@ -9,6 +9,7 @@ Widget emptyList(BuildContext context) {
     children: [
       appBar(context),
       Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 50.0),

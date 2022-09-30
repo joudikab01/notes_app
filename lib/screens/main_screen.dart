@@ -27,6 +27,7 @@ class _MainScreenState extends State<MainScreen> {
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
+              backgroundColor: Colors.white,
               extendBodyBehindAppBar: true,
               body: Consumer<NoteProvider>(
                 child: emptyList(context),
